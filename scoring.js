@@ -23,6 +23,8 @@ $(document).ready(function(){
     // 変数「average」に
     // 平均値を出して代入します。(平均をとりたい数の合計点数(sum) / 全体の個数)
     // ヒント! 全体の個数はlengthメソッドを使って求めます。(lengthメソッド: 文字列の長さや配列の要素数などを取得するメソッド)
+    let avarage = sum / subject_points.length;
+    $("#average_indicate").text(avarage);
   };
   // 平均点数を取得し、取得した平均点数からランク分け("A", "B", "C", "D")をするロジックを作ります。
   function get_achievement(){
@@ -56,7 +58,20 @@ $(document).ready(function(){
     let judge = "合格";
     // 入力したそれぞれの教科の点数が60点よりも低いと変数「judge」に"不合格"を再代入して「judge」を返します。
     // ヒント! 「javascript 点数 合格 不合格 ロジック」で検索してみてください。
-    return pass_or_failure;
+    if (subject_points[0] >= 60 &&
+        subject_points[1] >= 60 &&
+        subject_points[2] >= 60 &&
+        subject_points[3] >= 60 &&
+        subject_points[4] >= 60 ){
+        console.log(judge);
+      } else{
+        let judge = "不合格";
+        console.log(judge);
+        return judge;
+
+      };
+
+      return judge;
   };
   // 最終的なジャッジのロジックを作ります。
   function judgement(){
@@ -81,6 +96,7 @@ $(document).ready(function(){
   });
   // 「最終ジャッジ」(id="btn-declaration")ボタンを押したら「function judgement()」が出力される処理です。
   $('#btn-declaration').click(function() {
+    $("#declaration").text(`あなたの成績は${get_achievement()}です。${get_pass_or_failure()}です`);
   });
 });
 // ここに書かれているjsの記述はあくまでヒントとして用意された雛形なので、書かれている記述に従わずに実装したいという場合は、自分の好きに実装して構わない。課題要件を満たし、コードの品質が一定の水準にあると判定されればどのような実装でも合格になる。
